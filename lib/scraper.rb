@@ -23,28 +23,6 @@ class Scraper
     student[:linkedin] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ } unless doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ } == nil
     student[:github] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /github.com/ } unless doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /github.com/ } == nil
     student[:blog] = doc.css(".social-icon-container a")[3].attribute("href").value unless doc.css(".social-icon-container a")[3] == nil
-'''
-    binding.pry
-    doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ }
-    doc.xpath('//social-icon-container/')
-    array = []
-    doc.css(".social-icon-container a").each do |anchor|
-      array << anchor.attribute('href').value
-    end
-    array
-    doc.css(".social-icon-container a[href]").attribute('href').value
-    #student[:twitter] = doc.css(".social-icon-container a")[0].attribute("href").value unless doc.css(".social-icon-container a")[0] == nil
-    student[:twitter] = doc.at_css(".social-icon-container a[href]:contains(twitter)").attribute("href").value unless doc.at_css(".social-icon-container a[href]:contains(twitter)") == nil
-    #student[:linkedin] = doc.css(".social-icon-container a")[1].attribute("href").value unless doc.css(".social-icon-container a")[1] == nil
-    student[:linkedin] = doc.at_css(".social-icon-container a[href.include?('linkedin')]").attribute("href").value #unless doc.at_css(".social-icon-container a[href]:contains(linkedin)") == nil
-    #student[:github] = doc.css(".social-icon-container a")[2].attribute("href").value unless doc.css(".social-icon-container a")[2] == nil
-    student[:github] = doc.at_css(".social-icon-container a[href]:contains(github)").attribute("href").value unless doc.at_css(".social-icon-container a[href]:contains(github)") == nil
-    student[:blog] = doc.css(".social-icon-container a")[3].attribute("href").value unless doc.css(".social-icon-container a")[3] == nil
-    #student[:blog] =doc.at_css(".social-icon-container a[href]:contains()").attribute("href").value unless doc.at_css(".social-icon-container a[href]:contains(twitter)") == nil
-    student[:profile_quote] = doc.css(".profile-quote").text
-    student[:bio] = doc.css(".description-holder p").text
-    student
-'''
   end
 
 end
@@ -61,4 +39,9 @@ students.each do |student|
   student[:bio] = profile.css(".description-holder p").text
 end
 student
+
+array = []
+doc.css(".social-icon-container a").each do |anchor|
+  array << anchor.attribute('href').value
+end
 '''
