@@ -23,7 +23,7 @@ class Scraper
     student[:linkedin] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ } unless doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ } == nil
     student[:github] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /github.com/ } unless doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /github.com/ } == nil
     student[:blog] = doc.css(".social-icon-container a")[3].attribute("href").value unless doc.css(".social-icon-container a")[3] == nil
-
+'''
     binding.pry
     doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ }
     doc.xpath('//social-icon-container/')
@@ -44,7 +44,7 @@ class Scraper
     student[:profile_quote] = doc.css(".profile-quote").text
     student[:bio] = doc.css(".description-holder p").text
     student
-    binding.pry
+'''
   end
 
 end
