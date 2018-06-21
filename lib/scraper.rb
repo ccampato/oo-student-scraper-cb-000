@@ -19,7 +19,7 @@ class Scraper
   def self.scrape_profile_page(profile_url)
     doc = Nokogiri::HTML(open(profile_url))
     student = {}
-    student[:twitter] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /twitter.com/ } unless :twitter nil
+    student[:twitter] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /twitter.com/ } unless :twitter == nil
     student[:linkedin] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ } unless doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ } == nil
     student[:github] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /github.com/ } unless doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /github.com/ } == nil
     student[:blog] = doc.css(".social-icon-container a").last.attribute("href").value unless student.has_value?(doc.css(".social-icon-container a").last.attribute("href").value)
