@@ -42,6 +42,6 @@ student
 
 array = []
 doc.css(".social-icon-container a").each do |anchor|
-  array << anchor.attribute('href').value
+  array << anchor.attribute().value
 end
 '''
