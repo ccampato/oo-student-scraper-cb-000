@@ -29,22 +29,3 @@ class Scraper
   end
 
 end
-
-'''
-students = @@all.map { |hash| hash.values_at(:name, :profile_url) }
-students.each do |student|
-  profile = Nokogiri::HTML(open("./fixtures/student-site/"+student[1].to_s))
-  student[:twitter] = profile.css(".social-icon-container a")[0].attribute("href").value unless profile.css(".social-icon-container a")[0] == nil
-  student[:linkedin] = profile.css(".social-icon-container a")[1].attribute("href").value unless profile.css(".social-icon-container a")[1] == nil
-  student[:github] = profile.css(".social-icon-container a")[2].attribute("href").value unless profile.css(".social-icon-container a")[2] == nil
-  student[:blog] = profile.css(".social-icon-container a")[3].attribute("href").value unless profile.css(".social-icon-container a")[3] == nil
-  student[:profile_quote] = profile.css(".profile-quote").text
-  student[:bio] = profile.css(".description-holder p").text
-end
-student
-
-array = []
-doc.css(".social-icon-container a").each do |anchor|
-  array << anchor.attribute().value
-end
-'''
