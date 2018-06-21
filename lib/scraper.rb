@@ -19,12 +19,20 @@ class Scraper
   def self.scrape_profile_page(profile_url)
     doc = Nokogiri::HTML(open(profile_url))
     student = {}
+    student[:twitter] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /twitter.com/ } unless doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /twitter.com/ } == nil
+    student[:linkedin] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ } unless doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ } == nil
+    student[:github] = doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /github.com/ } unless doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /github.com/ } == nil
+    student[:blog] = doc.css(".social-icon-container a")[3].attribute("href").value unless doc.css(".social-icon-container a")[3] == nil
+
     binding.pry
+    doc.css('a').map { |e| e.attributes.values.first.value }.detect {|e| e =~ /linkedin.com/ }
     doc.xpath('//social-icon-container/')
+    array = []
     doc.css(".social-icon-container a").each do |anchor|
-      anchor.attribute('href').value
+      array << anchor.attribute('href').value
     end
-    doc.css(".social-icon-container a").attribute[@href="https://twitter.com/jmburges"].value
+    array
+    doc.css(".social-icon-container a[href]").attribute('href').value
     #student[:twitter] = doc.css(".social-icon-container a")[0].attribute("href").value unless doc.css(".social-icon-container a")[0] == nil
     student[:twitter] = doc.at_css(".social-icon-container a[href]:contains(twitter)").attribute("href").value unless doc.at_css(".social-icon-container a[href]:contains(twitter)") == nil
     #student[:linkedin] = doc.css(".social-icon-container a")[1].attribute("href").value unless doc.css(".social-icon-container a")[1] == nil
