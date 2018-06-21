@@ -20,6 +20,11 @@ class Scraper
     doc = Nokogiri::HTML(open(profile_url))
     student = {}
     binding.pry
+    doc.xpath('//social-icon-container/')
+    doc.css(".social-icon-container a").each do |anchor|
+      anchor.attribute('href').value
+    end
+    doc.css(".social-icon-container a").attribute[@href="https://twitter.com/jmburges"].value
     #student[:twitter] = doc.css(".social-icon-container a")[0].attribute("href").value unless doc.css(".social-icon-container a")[0] == nil
     student[:twitter] = doc.at_css(".social-icon-container a[href]:contains(twitter)").attribute("href").value unless doc.at_css(".social-icon-container a[href]:contains(twitter)") == nil
     #student[:linkedin] = doc.css(".social-icon-container a")[1].attribute("href").value unless doc.css(".social-icon-container a")[1] == nil
